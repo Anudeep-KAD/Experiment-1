@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 18px;
+      display: block;
+      margin-top: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 5px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    input.error {
+      border-color: red;
+    }
+
+    .error-text {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: black;
+      color: white;
+      border: none;
+      font-size: 18px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Student Registration</h1>
+
+  <label>Full Name:</label>
+  <input type="text" id="name">
+  <div id="nameError" class="error-text"></div>
+
+  <label>Email:</label>
+  <input type="text" id="email">
+  <div id="emailError" class="error-text"></div>
+
+  <label>Age:</label>
+  <input type="number" id="age">
+  <div id="ageError" class="error-text"></div>
+
+  <button onclick="validateForm()">Register</button>
+</div>
+
+<script>
+function validateForm() {
+  let name = document.getElementById("name");
+  let email = document.getElementById("email");
+  let age = document.getElementById("age");
+
+  let nameError = document.getElementById("nameError");
+  let emailError = document.getElementById("emailError");
+  let ageError = document.getElementById("ageError");
+
+  // Reset
+  name.classList.remove("error");
+  email.classList.remove("error");
+  age.classList.remove("error");
+
+  nameError.innerText = "";
+  emailError.innerText = "";
+  ageError.innerText = "";
+
+  let valid = true;
+
+  // Name validation (9-50 letters)
+  if (name.value.length < 9 || name.value.length > 50) {
+    name.classList.add("error");
+    nameError.innerText = "Must contain 9-50 letters";
+    valid = false;
+  }
+
+  // Email validation
+  let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  if (!email.value.match(emailPattern)) {
+    email.classList.add("error");
+    emailError.innerText = "Valid email required";
+    valid = false;
+  }
+
+  // Age validation (16-30)
+  if (age.value < 16 || age.value > 30) {
+    age.classList.add("error");
+    ageError.innerText = "Age 16-30 only";
+    valid = false;
+  }
+
+  if (valid) {
+    alert("Registration Successful!");
+  }
+}
+</script>
+
+</body>
+</html>
